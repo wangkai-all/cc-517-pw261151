@@ -1,0 +1,23 @@
+{
+  "name": "示例：缺底层预测，由其他约束决定",
+  "description": "三个单元格没有底层预测（留空）。它们不进入目标函数，但仍被地区锁定值与品类预测唯一确定。",
+  "input": {
+    "regions": ["华北", "华东", "华南"],
+    "categories": ["饮料", "零食", "生鲜"],
+    "cells": {
+      "forecast": [[100, 120, 80], [90, null, 70], [null, 60, null]],
+      "weight": [[1, 1, 1], [1, null, 1], [null, 1, null]]
+    },
+    "regionTotals": {
+      "forecast": [300, 260, 240],
+      "weight": [3, 3, 3],
+      "lock": [300, null, null]
+    },
+    "categoryTotals": {
+      "forecast": [260, 260, 220],
+      "weight": [2, 2, 2],
+      "lock": [null, null, null]
+    },
+    "grandTotal": {"forecast": 800, "weight": 1, "lock": null}
+  }
+}

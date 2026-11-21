@@ -1,0 +1,23 @@
+{
+  "name": "示例：地区与品类预测明显对不上",
+  "description": "单元格预测合计 1080，地区预测合计 1140，品类预测合计 1120，全盘预测 1150 —— 四套预测互不相等，校准后合并为一张能对上账的计划表。",
+  "input": {
+    "regions": ["华北", "华东", "华南"],
+    "categories": ["饮料", "零食", "生鲜"],
+    "cells": {
+      "forecast": [[120, 150, 90], [130, 160, 100], [110, 140, 80]],
+      "weight": [[1, 1, 1], [1, 2, 1], [1, 1, 1]]
+    },
+    "regionTotals": {
+      "forecast": [400, 380, 360],
+      "weight": [4, 4, 4],
+      "lock": [null, null, null]
+    },
+    "categoryTotals": {
+      "forecast": [350, 470, 300],
+      "weight": [3, 3, 3],
+      "lock": [null, null, null]
+    },
+    "grandTotal": {"forecast": 1150, "weight": 1, "lock": null}
+  }
+}

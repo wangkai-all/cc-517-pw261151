@@ -1,0 +1,23 @@
+{
+  "name": "示例：锁定条件互相冲突",
+  "description": "地区锁定合计 600（华北 300 + 华东 300），品类锁定合计 800（饮料 400 + 零食 400）。两者不可能同时成立，页面会列出参与冲突的全部锁定，撤销其中任意一条即可重算。",
+  "input": {
+    "regions": ["华北", "华东"],
+    "categories": ["饮料", "零食"],
+    "cells": {
+      "forecast": [[100, 100], [100, 100]],
+      "weight": [[1, 1], [1, 1]]
+    },
+    "regionTotals": {
+      "forecast": [null, null],
+      "weight": [null, null],
+      "lock": [300, 300]
+    },
+    "categoryTotals": {
+      "forecast": [null, null],
+      "weight": [null, null],
+      "lock": [400, 400]
+    },
+    "grandTotal": {"forecast": null, "weight": null, "lock": null}
+  }
+}

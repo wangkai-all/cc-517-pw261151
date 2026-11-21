@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地区 × 品类 预测校准计划表</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>地区 × 品类 预测校准计划表</h1>
+  <p class="sub">
+    把地区与品类两套预测合并成一张能对上账的计划表。校准以非负的底层单元格为变量，
+    各层总量由单元格求和；在满足锁定值的前提下最小化所有已提供预测的加权平方偏差
+    （未提供的预测不参与目标函数）；若多个解同样好，取单元格平方和最小者，保证同样的输入得到同样的结果。
+  </p>
+</header>
+
+<section id="toolbar">
+  <div class="group">
+    <select id="sampleSelect">
+      <option value="">— 载入示例数据 —</option>
+      <option value="mismatch">示例：地区与品类预测明显对不上</option>
+      <option value="missing_base">示例：缺底层预测，由其他约束决定</option>
+      <option value="lock_conflict">示例：锁定条件互相冲突</option>
+      <option value="zero_cell">示例：底层单元格被压到零</option>
+    </select>
+    <button id="loadSampleBtn">载入示例</button>
+    <button id="importJsonBtn">导入 JSON</button>
+    <button id="importCsvBtn" title="CSV 格式：地区,品类,预测[,权重]，含表头">导入 CSV</button>
+    <button id="exportBtn">导出草稿 JSON</button>
+    <input type="file" id="fileInput" hidden>
+  </div>
+  <div class="group">
+    <button id="addRegionBtn">+ 地区</button>
+    <button id="addCategoryBtn">+ 品类</button>
+    <button id="calibrateBtn" class="primary">校准</button>
+    <input id="publishName" placeholder="发布名称，如：2026-12 计划">
+    <button id="publishBtn" disabled title="需要先得到可行且未过期的校准结果">发布</button>
+  </div>
+</section>
+
+<div id="banner" class="hidden"></div>
+
+<nav id="tabs">
+  <button data-tab="edit" class="active">① 编辑草稿</button>
+  <button data-tab="compare">② 校准前后对比</button>
+  <button data-tab="objective">③ 目标函数与校验</button>
+  <button data-tab="published">④ 发布记录</button>
+</nav>
+
+<main>
+  <section id="tab-edit"></section>
+  <section id="tab-compare" class="hidden"></section>
+  <section id="tab-objective" class="hidden"></section>
+  <section id="tab-published" class="hidden"></section>
+</main>
+
+<footer>
+  <span>求解：两阶段字典序凸二次规划（积极集法 + 单纯形可行性检验），每次求解均校验 KKT 残差、锁定残差与非负性；发布记录为不可变快照。</span>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
